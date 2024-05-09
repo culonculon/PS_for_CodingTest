@@ -12,12 +12,6 @@ Distance = [[INF] * (W + 1) for _ in range(H + 1)]
 Map = [[''] * (W + 1) for _ in range(H + 1)]
 Q = []
 
-# visited = [[False] * (H+1) for i in range(W+1)]
-
-# print(D)
-# print(M)
-# print(visited)
-
 # 시작 지점(K)와 목표 지점(*)의 좌표
 py, px = 0, 0
 
@@ -32,6 +26,7 @@ for i in range(1, H+1):
         elif Map[i][j] == '*':
             py, px = (i,j)
 
+## 다익스트라
 while Q:
     a, b, c = heapq.heappop(Q) # 위치와 y,x 값
     if -a <= Distance[b][c]:
@@ -39,7 +34,7 @@ while Q:
             y = b + dy[i]
             x = c + dx[i]
             if 1 <= y <= H and 1<= x <= W and Map[y][x] != '#':
-                d = (i < 5) - a
+                d = (i < 5) - a  # 새로운 위치까지의 거리 값 
                 if d < Distance[y][x]:
                     Distance[y][x] = d
                     heapq.heappush(Q, (-d, y, x))
@@ -49,7 +44,7 @@ print(Distance)
 result = Distance[py][px] if Distance[py][px] < INF else -1
 
 
-    
+print(result)
     
 # print(Sharp)
 # print(boat)
